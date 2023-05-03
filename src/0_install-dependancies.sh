@@ -1,0 +1,4 @@
+bcftools
+tabix
+plink
+qctools
