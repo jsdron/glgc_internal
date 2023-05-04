@@ -38,6 +38,7 @@ imputation_path = ${1} # path to output from imputation
 
 for i in {1..22};  
 	do 
+		**** need to get the right input
 		qctool -g ${imputation_path}/chr${i}.bgen -snp-stats -osnp ../results_for_upload/chr${i}.snp-stats.txt
 	done
 

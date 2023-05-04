@@ -21,7 +21,7 @@
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Output: 																													##
-## 			This script will produce ...
+## 			This script will produce VCF files that will be used as input for imputation with the TOPMed reference panel.		##
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Example: 																													##	
@@ -45,7 +45,7 @@
 ./Run-plink.sh # the output, Study-updated-chr, is one updated binary file per chromosome
 mv ./Study-updated-chr* 
 
-### Convert the newly output Study-updated-chr files to VC format
+### Convert the newly output Study-updated-chr files to VCF format
 for i in {1..22};  
 	do 
 		plink --bfile ../data/Study-updated-chr${i} --keep-allele-order --recode vcf-iid --out ../data/Study-updated-chr${i}
