@@ -38,8 +38,9 @@
 # ------------------------------------- #
 #  Input parameters						#
 # ------------------------------------- #
-geno_input = ${1} # the prefilx of the genotype files
-build = ${2} # the build of the genotype files
+geno_input=${1} # the prefilx of the genotype files
+build=${2} # the build of the genotype files
+file_prefix=$(basename "$1" | cut -d. -f1)
 
 # ------------------------------------- #
 #  Starting script						#
@@ -59,7 +60,7 @@ build = ${2} # the build of the genotype files
 	rm ../tools/LICENSE.txt
 
 ### Generate frequency files for your genotypes
-	plink --bfile ${geno_input} --freq --out ../data/tmp
+	plink --bfile ${geno_input} --freq --out ../data/file_prefix
 
 ### Convert the file downloaded from the Bravo website into an HRC-formatted reference legend. By default, this tool creates a file filtered for variants flagged as PASS only. 
 	../tools/CreateTOPMed.pl -i ../data/ALL.TOPMed_freeze5_hg38_dbSNP.vcf.gz # The output file is PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz
@@ -84,14 +85,14 @@ if [[ ${build} -eq 19 ]]; then
 !!!! POP SPECIFIC VARIANT CHECK !!!!
 
 		### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-		./tools/HRC-1000G-check-bim.pl -b ../data/tmp.bim -f ../data/tmp.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
+		./tools/HRC-1000G-check-bim.pl -b ../data/file_prefix.bim -f ../data/file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
 
 elif [[ ${build} -eq 38  ]]; then
 
 !!!! POP SPECIFIC VARIANT CHECK !!!!
 
 ### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-	./tools/HRC-1000G-check-bim.pl -b ../data/tmp.bim -f ../data/tmp.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
+	./tools/HRC-1000G-check-bim.pl -b ../data/file_prefix.bim -f ../data/file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
 
 
 fi

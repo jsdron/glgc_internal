@@ -30,7 +30,7 @@
 # ------------------------------------- #
 #  Input parameters						#
 # ------------------------------------- #
-imputation_path = ${1} # path to output from imputation
+imputation_path=${1} # path to output from imputation
 
 # ------------------------------------- #
 #  Starting script						#
