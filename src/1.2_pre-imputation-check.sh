@@ -67,7 +67,7 @@ build = ${2}
 
 ### If the QC'd genotype data are in build hg19/GRCh37, the Bravo-downloaded file will need to be lifted over to buld GRCh38
 
-if [ ${build} -eq 19 ]; then
+if [[ ${build} -eq 19 ]]; then
 
 	### If you do not have your own pipeline for variant liftover, you can download the liftOver tool and appropriate chain file
 	mkdir ../tools/liftover
@@ -86,7 +86,7 @@ if [ ${build} -eq 19 ]; then
 		### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
 		./tools/HRC-1000G-check-bim.pl -b ../data/input_file_prefix.bim -f ../data/input_file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
 
-else
+elif [[ ${build} -eq 38  ]]; then
 
 **** POP SPECIFIC VARIANT CHECK ****
 
