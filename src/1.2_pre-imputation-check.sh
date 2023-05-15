@@ -14,9 +14,9 @@
 ## 			1.2_pre-imputation-check.sh A B
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Input Parameters: 																											##
-##			A = Path to QC'd genotype files. Must be in the format XXX. Do NOT include the file type. (Required | Type: String)	##
-##			B = Reference build for QC'd genotype data. Must be either '19' or '38'. (Required | Type: Int) 					##
+## 	Input Parameters (* are required): 																							##
+##			*A (Type: String) = Path to QC'd genotype files. Must be in the format XXX. Do NOT include the file type. 			##
+##			*B (Type: Int) = Reference build for QC'd genotype data. Must be either '19' or '38'. 								##
 ##			C =
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
@@ -31,15 +31,15 @@
 ## 	IMPORTANT NOTE: 																											##	
 ## 			The user MUST download the VCF version (GRCh38) of the TOPMed reference file prior to running this script. 			##  
 ##			The file must be downloaded directly from the website: https://bravo.sph.umich.edu/freeze5/hg38/					##
-##			Please download the file to the /data/ directory and do not change the file name.									##
+##			Please download the file to the ../data/ directory and do not change the file name.									##
 ## 																																##
 ##################################################################################################################################
 
 # ------------------------------------- #
 #  Input parameters						#
 # ------------------------------------- #
-geno_input = ${1} # your_binary_plink_prefix
-build = ${2}
+geno_input = ${1} # the prefilx of the genotype files
+build = ${2} # the build of the genotype files
 
 # ------------------------------------- #
 #  Starting script						#
@@ -59,7 +59,7 @@ build = ${2}
 	rm ../tools/LICENSE.txt
 
 ### Generate frequency files for your genotypes
-	plink --bfile ${geno_input} --freq --out ../data/input_file_prefix
+	plink --bfile ${geno_input} --freq --out ../data/tmp
 
 ### Convert the file downloaded from the Bravo website into an HRC-formatted reference legend. By default, this tool creates a file filtered for variants flagged as PASS only. 
 	../tools/CreateTOPMed.pl -i ../data/ALL.TOPMed_freeze5_hg38_dbSNP.vcf.gz # The output file is PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz
@@ -81,17 +81,17 @@ if [[ ${build} -eq 19 ]]; then
 	### Complete the GRCh38 to hg19 liftover
 		../tools/liftover/liftOver PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz ../tools/liftoverhg38ToHg19.over.chain.gz ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.failed.bed 
 
-**** POP SPECIFIC VARIANT CHECK ****
+!!!! POP SPECIFIC VARIANT CHECK !!!!
 
 		### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-		./tools/HRC-1000G-check-bim.pl -b ../data/input_file_prefix.bim -f ../data/input_file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
+		./tools/HRC-1000G-check-bim.pl -b ../data/tmp.bim -f ../data/tmp.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
 
 elif [[ ${build} -eq 38  ]]; then
 
-**** POP SPECIFIC VARIANT CHECK ****
+!!!! POP SPECIFIC VARIANT CHECK !!!!
 
 ### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-	./tools/HRC-1000G-check-bim.pl -b ../data/input_file_prefix.bim -f ../data/input_file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
+	./tools/HRC-1000G-check-bim.pl -b ../data/tmp.bim -f ../data/tmp.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
 
 
 fi
