@@ -60,42 +60,44 @@ file_prefix=$(basename "$1" | cut -d. -f1)
 	rm ../tools/LICENSE.txt
 
 ### Generate frequency files for your genotypes
-	plink --bfile ${geno_input} --freq --out ../data/file_prefix
+	plink --bfile ${geno_input} --freq --out ../data/${file_prefix}
 
 ### Convert the file downloaded from the Bravo website into an HRC-formatted reference legend. By default, this tool creates a file filtered for variants flagged as PASS only. 
 	../tools/CreateTOPMed.pl -i ../data/ALL.TOPMed_freeze5_hg38_dbSNP.vcf.gz # The output file is PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz
 	mv ./PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz ../data/
 
 ### If the QC'd genotype data are in build hg19/GRCh37, the Bravo-downloaded file will need to be lifted over to buld GRCh38
+  # hg19
+	if [[ ${build} -eq 19 ]]; then
 
-if [[ ${build} -eq 19 ]]; then
+		### If you do not have your own pipeline for variant liftover, you can download the liftOver tool and appropriate chain file
+		mkdir ../tools/liftover
+		  
+		  # Tool: liftOver 	
+		 	wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/liftOver -P ../tools/liftover 
+		  
+		  # File: hg38ToHg19.over.chain.gz
+			wget https://hgdownload.cse.ucsc.edu/goldenpath/hg38/liftOver/hg38ToHg19.over.chain.gz -P ../tools/liftover 
+			
+		### Complete the GRCh38 to hg19 liftover
+			../tools/liftover/liftOver PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz ../tools/liftoverhg38ToHg19.over.chain.gz ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.failed.bed 
 
-	### If you do not have your own pipeline for variant liftover, you can download the liftOver tool and appropriate chain file
-	mkdir ../tools/liftover
-	  
-	  # Tool: liftOver 	
-	 	wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/liftOver -P ../tools/liftover 
-	  
-	  # File: hg38ToHg19.over.chain.gz
-		wget https://hgdownload.cse.ucsc.edu/goldenpath/hg38/liftOver/hg38ToHg19.over.chain.gz -P ../tools/liftover 
-		
-	### Complete the GRCh38 to hg19 liftover
-		../tools/liftover/liftOver PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz ../tools/liftoverhg38ToHg19.over.chain.gz ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.failed.bed 
+		### Remove any SNP that has a deviation in allele frequency beyond what is observed in gnomAD
+		!!!! POP SPECIFIC VARIANT CHECK !!!!
 
-!!!! POP SPECIFIC VARIANT CHECK !!!!
+			### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
+			./tools/HRC-1000G-check-bim.pl -b ../data/${file_prefix}.bim -f ../data/${file_prefix}.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
+  
+  # GRCh 38
+	elif [[ ${build} -eq 38  ]]; then
+
+		!!!! POP SPECIFIC VARIANT CHECK !!!!
 
 		### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-		./tools/HRC-1000G-check-bim.pl -b ../data/file_prefix.bim -f ../data/file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
-
-elif [[ ${build} -eq 38  ]]; then
-
-!!!! POP SPECIFIC VARIANT CHECK !!!!
-
-### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-	./tools/HRC-1000G-check-bim.pl -b ../data/file_prefix.bim -f ../data/file_prefix.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
+			./tools/HRC-1000G-check-bim.pl -b ../data/${file_prefix}.bim -f ../data/${file_prefix}.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
 
 
-fi
+	fi
 
 
 

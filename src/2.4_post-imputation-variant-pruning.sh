@@ -3,7 +3,7 @@
 ##################################################################################################################################
 ## 																																##
 ## 	Script Name: 2.4_post-imputation-variant-pruning.sh																			##
-## 	Description: This script extracts the INFO (R2) score related to quality imputation for each variant.  						##
+## 	Description: This script removes any monomorphic variants and only keeps polymophic variants.  								##
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		##
 ##			 XXX <email>
 ## 	Date: 2023-05-03																											##
@@ -14,12 +14,12 @@
 ## 			2.4_post-imputation-variant-pruning.sh	 A
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Input Parameters: 																											##
-##			A = Path to imputation output.  (Required | Type: String)	##
+## 	Input Parameters (* are required): 																							##
+##			*A (Type: String) = Path to imputation output.  																	##
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Output: 																													##
-## 			This script will produce a  ... 
+## 			This script will produce VCFs (one per chromosome) that only include polymorphic sites.								##
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Example: 																													##	
@@ -39,5 +39,5 @@ imputation_path=${1} # path to output from imputation
 for i in {1..22};
 	do
 		bcftools view –c 1:minor chr${i}.dose.vcf.gz -O z > chr${i}.imputed.poly.vcf.gz
-		tabix -p vcf ../results/chr${i}.imputed.poly.vcf.gz
+		tabix -p vcf ../results_tmp/chr${i}.imputed.poly.vcf.gz
 	done
