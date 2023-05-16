@@ -1,4 +1,5 @@
 # glgc_internal
 
+Docker information
 
-Need to download and install the following:
+General instructions on how to get GitHub repo (think new users)
