@@ -86,7 +86,7 @@ file_prefix=$(basename "$1" | cut -d. -f1)
 		!!!! POP SPECIFIC VARIANT CHECK !!!!
 
 			### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-			./tools/HRC-1000G-check-bim.pl -b ../data/${file_prefix}.bim -f ../data/${file_prefix}.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h # This script produces a shell script called Run-plink.sh.
+			./tools/HRC-1000G-check-bim.pl -b ../data/${file_prefix}.bim -f ../data/${file_prefix}.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg19_dbSNP.bed –h -l ${geno_input} # This script produces a shell script called Run-plink.sh.
   
   # GRCh 38
 	elif [[ ${build} -eq 38  ]]; then
@@ -94,7 +94,7 @@ file_prefix=$(basename "$1" | cut -d. -f1)
 		!!!! POP SPECIFIC VARIANT CHECK !!!!
 
 		### With the (i) PLINK frequency files and the (ii) HRC-formatted TOPMed reference file, the tool can be run as follows	
-			./tools/HRC-1000G-check-bim.pl -b ../data/${file_prefix}.bim -f ../data/${file_prefix}.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h ## This script produces a shell script called Run-plink.sh.
+			./tools/HRC-1000G-check-bim.pl -b ../data/${file_prefix}.bim -f ../data/${file_prefix}.frq -r ../data/PASS.Variants.TOPMed_freeze5_hg38_dbSNP.tab.gz –h -l ${geno_input} ## This script produces a shell script called Run-plink.sh.
 
 
 	fi
