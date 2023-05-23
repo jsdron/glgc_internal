@@ -29,13 +29,11 @@
 #  Starting script						#
 # ------------------------------------- #
 
-mkdir -p ../results_for_upload/imputation_quality/
-
 for i in {1..22};  
 	do 
-		zcat ../results_tmp/chr${i}.imputed.poly.vcf.gz | qctool -g - -filetype vcf -snp-stats -osnp ../results_for_upload/imputation_quality/chr${i}.snp-stats.txt
+		zcat ../results_tmp/chr${i}.imputed.poly.vcf.gz | qctool -g - -filetype vcf -snp-stats -osnp ../results_for_upload/imputation_qc/chr${i}.snp-stats.txt
 	done
 
 
-### merge them together? and then delete the single file?
+### merge them together, keep only necessary info, delete extra files that are not needed
 
