@@ -153,3 +153,6 @@ elif [[ ${file_type} = 'PGEN' ]]; then
 fi  	
 
 
+
+### excluude SNPs from outcome file based on... (align with MAGEE)
+

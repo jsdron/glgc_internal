@@ -11,7 +11,7 @@
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Usage:																														##
-## 			2.4_post-imputation-variant-pruning.sh	 A
+## 			2.4_post-imputation-variant-pruning.sh	 A 																			##
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Input Parameters (* are required): 																							##
@@ -23,7 +23,7 @@
 ## 																																##
 ## ---------------------------------------------------------------------------------------------------------------------------- ##
 ## 	Example: 																													##	
-## 			2.4_post-imputation-variant-pruning.sh /path/to/my/QC/files   
+## 			2.4_post-imputation-variant-pruning.sh /path/to/my/QC/files   														##
 ## 																																##
 ##################################################################################################################################
 
@@ -38,6 +38,6 @@ imputation_path=${1} # path to output from imputation
 
 for i in {1..22};
 	do
-		bcftools view –c 1:minor chr${i}.dose.vcf.gz -O z > chr${i}.imputed.poly.vcf.gz
+		bcftools view –c 1:minor ${imputation_path}/chr${i}.dose.vcf.gz -O z > chr${i}.imputed.poly.vcf.gz
 		tabix -p vcf ../results_tmp/chr${i}.imputed.poly.vcf.gz
 	done
