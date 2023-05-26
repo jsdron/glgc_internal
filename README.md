@@ -32,23 +32,6 @@ npm install
 - GEM (1.4.5 or up): https://github.com/large-scale-gxe-methods/GEM 
 - MAGEE (version): 
 
-### Docker
-All necessary software have been assembled into a [Docker image](LINK).
-
-To install Docker:
-```bash
-code
-```
-
-To use our GLGC Docker image:
-```bash
-# Download our image:
-docker pull XXX
-
-# Run our image:
-docker run -it XXX
-```
-
 ## Set-Up
 
 
