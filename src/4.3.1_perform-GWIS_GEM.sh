@@ -1,61 +1,61 @@
 #!/bin/bash
 
 ##################################################################################################################################
-## 																																##
-## 	Script Name: 4.3.1_perform-GWIS_GEM.sh																						##
-## 	Description: XXX  						##
-## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		##
+## 																																
+## 	Script Name: 4.3.1_perform-GWIS_GEM.sh																						
+## 	Description: XXX  						
+## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
 ##			 XXX <email>
-## 	Date: 2023-05-15																											##
-## 	Version: 1.0																												##
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Usage:																														##
+## 	Date: 2023-05-15																											
+## 	Version: 1.0																												
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Usage:																													
 ## 			4.3.1_perform-GWIS_GEM.sh 	A 	B 	C 	D 	E 	F 	G 	H 	I 	J 	
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Input Parameters (* are required): 																							##
-##			*A (Type: String) = Indicator for imputation input. Must be one of the following:	 								##
-##									'BGEN' = .bgen input																		##
-##									'PGEN' = .pgen, .pvar, .psam input															##
-##									'BED'  = .bed, .bim, .fam																	##	
-##			*B (Type: String) = Path to imputation files, including the file prefix. Do not include any file extensions. 		##
-##			*C (Type: String) = If 'BGEN' input does not contain sample identifiers, this is the path to the sample file, 		##
-##								including the file prefix and extension. If the sample file is not needed, 						##
-##								set parameter as 'NA'.  																		##
-##			*D (Type: String) = Path to the phenotype file, including file prefix and extension. 								##
-##			*E (Type: String) = Delimiter of the phenotype file. Must be one of the following:									##
-##									'\t' = tab-delimited																		##
-##									'\0' = space-delimited																		##
-##									','  = comma-separated																		##
-##			*F (Type: String) = Variable name in the phenotype file that contains sample identifiers. Needs to match the IDs 	##
-##								used in the .bgen sample file, if provided.														##
-##			*G (Type: String) = Variable name in the phenotype file that contains the outcome of interest.						##
-##			*H (Type: String) = Variable name in the phenotype file that contains the exposure of interest.						##
-##			*I (Type: String) = List of covariates to be used in the model. Variable names must correspond to names used		##
-##								in the phneotype file. Put a single space between each listed variable.							##
-##								DO NOT INCLUDE THE EXPOSURE AS A COVARIATE or else an error will occur. GEM automatically		##
-##								includes the exposure as a covariate. 															##
-##			*J (Type: String) = The prefix for all of the GEM output files. The extension is automatically set to 'gem.out'. 	##
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Input Parameters (* are required): 																							
+##			*A (Type: String) = Indicator for imputation input. Must be one of the following:	 								
+##									'BGEN' = .bgen input																		
+##									'PGEN' = .pgen, .pvar, .psam input															
+##									'BED'  = .bed, .bim, .fam																		
+##			*B (Type: String) = Path to imputation files, including the file prefix. Do not include any file extensions. 		
+##			*C (Type: String) = If 'BGEN' input does not contain sample identifiers, this is the path to the sample file, 		
+##								including the file prefix and extension. If the sample file is not needed, 						
+##								set parameter as 'NA'.  																		
+##			*D (Type: String) = Path to the phenotype file, including file prefix and extension. 								
+##			*E (Type: String) = Delimiter of the phenotype file. Must be one of the following:									
+##									'\t' = tab-delimited																		
+##									'\0' = space-delimited																		
+##									','  = comma-separated																		
+##			*F (Type: String) = Variable name in the phenotype file that contains sample identifiers. Needs to match the IDs 	
+##								used in the .bgen sample file, if provided.														
+##			*G (Type: String) = Variable name in the phenotype file that contains the outcome of interest.						
+##			*H (Type: String) = Variable name in the phenotype file that contains the exposure of interest.						
+##			*I (Type: String) = List of covariates to be used in the model. Variable names must correspond to names used		
+##								in the phneotype file. Put a single space between each listed variable.							
+##								DO NOT INCLUDE THE EXPOSURE AS A COVARIATE or else an error will occur. GEM automatically		
+##								includes the exposure as a covariate. 														
+##			*J (Type: String) = The prefix for all of the GEM output files. The extension is automatically set to 'gem.out'. 
 ##								Please use the naming convention detailed in XXXXXX. 	
-##																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Output: 																													##
+##																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Output: 																													
 ## 			This script will produce a  ... 
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Example 1: 																													##	
-## 			4.3.1_perform-GWIS_GEM.sh 'BGEN' /path/to/my/bgen/fileName /path/to/my/bgen/sample/fileName.tsv				##
-##					/path/to/my/phenotype/fileName.tsv '\t' 'sample_ID' 'LDLC' 'bmi' 'age age2 sex PC1 PC2 PC3 PC3 PC4'			##	
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Example 1: 																														
+## 			4.3.1_perform-GWIS_GEM.sh 'BGEN' /path/to/my/bgen/fileName /path/to/my/bgen/sample/fileName.tsv				
+##					/path/to/my/phenotype/fileName.tsv '\t' 'sample_ID' 'LDLC' 'bmi' 'age age2 sex PC1 PC2 PC3 PC3 PC4'				
 ##					'HDLC_ALLFAST_BMI_All_TOT_adult'
-## 	Example 2: 																													##	
+## 	Example 2: 																														
 ## 			4.3.1_perform-GWIS_GEM.sh 'BGEN' /path/to/my/bgen/fileName NA /path/to/my/phenotype/fileName.csv ',' 'IID'
 ##					'LDLC' 'age' 'age2 sex PC1 PC2 PC3 PC3 PC4 PC5 PC6'	'LDLC_NONFAST_BMI_M_EAS_adult'
 
-## 	Example 3: 																													##	
+## 	Example 3: 																														
 ## 			4.3.1_perform-GWIS_GEM.sh 'PGEN' /path/to/my/pfile/fileName NA /path/to/my/phenotype/fileName.tsv '\t' 'ids'
 ##					'TG' 'age' 'age2 sex PC1' 'TG_FAST_AGE_All_EAS_adult'	
-## 																																##
+## 																																
 ##################################################################################################################################
 
 # ------------------------------------- #
@@ -76,7 +76,10 @@ output_filename=${10} # GEM defaults the extension to 'gem.out'
 #  Starting script											#
 # ------------------------------------- #
 
-output=../results_for_upload/gem/${outcome}/${exposure}/
+Rscript ./MAGEE A B C D 
+
+
+output=../results_for_upload/GEM/${outcome}/${exposure}/
 mkdir -p ${output}
 
 ## splitting population groups, plus TOT

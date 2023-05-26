@@ -1,30 +1,30 @@
 #!/bin/bash
 
 ##################################################################################################################################
-## 																																##
-## 	Script Name: 2.4_post-imputation-variant-pruning.sh																			##
-## 	Description: This script removes any monomorphic variants and only keeps polymophic variants.  								##
-## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		##
+## 																																
+## 	Script Name: 2.4_post-imputation-variant-pruning.sh																			
+## 	Description: This script removes any monomorphic variants and only keeps polymophic variants.  								
+## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
 ##			 XXX <email>
-## 	Date: 2023-05-03																											##
-## 	Version: 1.0																												##
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Usage:																														##
-## 			2.4_post-imputation-variant-pruning.sh	 A 																			##
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Input Parameters (* are required): 																							##
-##			*A (Type: String) = Path to imputation output.  																	##
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Output: 																													##
-## 			This script will produce VCFs (one per chromosome) that only include polymorphic sites.								##
-## 																																##
-## ---------------------------------------------------------------------------------------------------------------------------- ##
-## 	Example: 																													##	
-## 			2.4_post-imputation-variant-pruning.sh /path/to/my/QC/files   														##
-## 																																##
+## 	Date: 2023-05-03																											
+## 	Version: 1.0																												
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Usage:																														
+## 			2.4_post-imputation-variant-pruning.sh	 A 																			
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Input Parameters (* are required): 																							
+##			*A (Type: String) = Path to imputation output.  																	
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Output: 																													
+## 			This script will produce VCFs (one per chromosome) that only include polymorphic sites.								
+## 																																
+## ---------------------------------------------------------------------------------------------------------------------------- 
+## 	Example: 																														
+## 			2.4_post-imputation-variant-pruning.sh /path/to/my/QC/files   														
+## 																																
 ##################################################################################################################################
 
 # ------------------------------------- #
