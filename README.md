@@ -8,10 +8,9 @@ Current version: 1.0
 
 - [Installation](#installation)
 - [Dependancies](#dependancies)
-- [Contribution](#contribution)
-- [Usage](#usage)
-- [License](#license)
-- [Questions](#questions)
+- [Set-Up](#setup)
+- [Analysis Plan](#analysisplan)
+- [Contact](#contact)
 
 ## Installation
 
@@ -23,22 +22,25 @@ npm install
 ```
 
 ## Dependancies
-- BGZIP and tabix (0.2.6): http://samtools.sourceforge.net/tabix.shtml
-- bcftools (1.3.1): http://www.htslib.org/download
-- qctools (version): 
-- vcftools (0.1.8): https://github.com/vcftools/vcftools
-- PLINK 1.9: 
-- PLINK 2.0: https://www.cog-genomics.org/plink2
-- GEM (1.4.5 or up): https://github.com/large-scale-gxe-methods/GEM 
-- MAGEE (version): 
+The following software is required to successfully run the pipeline; however, studies will only need either GEM or MAGEE, depending on if there are unrelated or related individuals, respectively. 
+- [BGZIP and tabix](http://www.htslib.org/download/) (0.2.6 or above), which can be downloaded as part of the `htslib` package
+- [BCFtools](http://www.htslib.org/download/) (1.3.1 or above)
+- [QCTOOL](https://www.well.ox.ac.uk/~gav/qctool_v2/documentation/download.html) (XXX or above) 
+- [vcftools](https://github.com/vcftools/vcftools) (0.1.8 or above)
+- [PLINK 1.9](https://www.cog-genomics.org/plink/) 
+- [PLINK 2.0](https://www.cog-genomics.org/plink/2.0/)
+- [GEM](https://github.com/large-scale-gxe-methods/GEM) (1.4.5 or above)
+- [MAGEE](https://github.com/large-scale-gxe-methods/MAGEE) (1.3.0 or above) 
+- R (4.1.0 or above)
 
-## Set-Up
-
-
-
-## Usage
-Prior to running any script, ensure the dependancies have been installed or the Docker image is running. 
+## Overview
+Here is a pictoral representation of the [analysis plan](#analysisplan):
 
 
-## Questions
+
+## Analysis Plan
+Do we want to include a PDF of our workplan? We could have a version control thing here, where we link the (uneditable) document here for studies to download. we can also have the different versions everytime they get updated.
+
+
+## Contact
 If you have any questions or feedback, please open an issue in this repository or contact the appropriate person listed in the analysis plan document. 
