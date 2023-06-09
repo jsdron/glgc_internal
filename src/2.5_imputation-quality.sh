@@ -13,8 +13,7 @@
 ## 			2.5_imputation_quality.sh  																							
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
-## 	Input Parameters (* are required): None																						
-## 																																
+## 	Input Parameters: None																																															
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Output: 																													
 ## 			This script will produce .txt files (one per chromosome) with SNP summary statistics, including R2.					
@@ -37,5 +36,5 @@ for i in {1..22};
 	done
 
 
-### merge them together, keep only necessary info, delete extra files that are not needed
+### Merge each file together into a single file
 
