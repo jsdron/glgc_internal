@@ -16,7 +16,7 @@ Current version: 1.0
 
 To install the GLGC 2023 Analysis Pipeline, run the following code: 
 ```bash
-git clone https://github.com/username/repository.git
+git clone https://github.com/jsdron/glgc_internal.git
 cd repository
 npm install
 ```
