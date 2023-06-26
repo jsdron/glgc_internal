@@ -5,7 +5,6 @@
 ## 	Script Name: 1.2_pre-imputation-check.sh																																										
 ## 	Description: This script checks files prior for imputation with the TOPMed reference panel ONLY. It is not for 1KG or HRC.  
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																																			
-##			 XXX <email>
 ## 	Date: 2023-05-03																																																						
 ## 	Version: 1.0																																																								
 ## 																																																															

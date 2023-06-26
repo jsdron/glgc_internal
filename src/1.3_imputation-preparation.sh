@@ -6,7 +6,6 @@
 ## 	Description: This script runs the ./Run-plink.sh script and produces a set of VCF files (one per chromosome) that			
 ## 				 have removed SNPs based on checks from the previous section. These files will be used for imputation.  		
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
-##			 XXX <email>
 ## 	Date: 2023-05-03																											
 ## 	Version: 1.0																												
 ## 																																
