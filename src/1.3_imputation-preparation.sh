@@ -48,7 +48,7 @@ for i in {1..22};
 	do 
 		plink --bfile ../data/Study-updated-chr${i} --keep-allele-order --recode vcf-iid --out ../data/Study-updated-chr${i}
 		bgzip ../data/Study-updated-chr${i}.vcf
-		tabix –p vcf ../data/Study-updated-chr${i}.vcf.gz
+		tabix -p vcf ../data/Study-updated-chr${i}.vcf.gz
 	done
 
 
