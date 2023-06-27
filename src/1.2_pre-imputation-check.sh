@@ -16,7 +16,6 @@
 ## 	Input Parameters (* are required): 																																													
 ##			*A (Type: String) = Path to QC'd genotype files. Must be BED/BIM/FAM. Do NOT include the file extension. 								
 ##			*B (Type: Int) = Reference build for QC'd genotype data. Must be either '19' or '38'. 																	
-##			C =
 ## 																																																															
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Output: 																																																										

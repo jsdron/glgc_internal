@@ -2,43 +2,35 @@
 
 ##################################################################################################################################
 ## 																																
-## 	Script Name: 2.4_post-imputation-variant-pruning.sh																			
-## 	Description: This script removes any monomorphic variants and only keeps polymophic variants. It will also remove 
-##				 variants not meeting the R2 threshold of 0.3.  								
+## 	Script Name: 2.5_merging-imputation-batches.sh																			
+## 	Description: This script merges your polymorphic-only, R2-filtered VCF files generated from the previous script					
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
-## 	Date: 2023-05-03																											
+## 	Date: 2023-05-27																											
 ## 	Version: 1.0																												
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Usage:																														
-## 			2.4_post-imputation-variant-pruning.sh	 A 																			
+## 			2.5_merging-imputation-batches.sh 																			
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
-## 	Input Parameters (* are required): 																							
-##			*A (Type: String) = Path to imputation output.  																	
-## 																																
+## 	Input Parameters: None						
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Output: 																													
-## 			This script will produce VCFs (one per chromosome) that only include polymorphic sites and have variants with an
-##			R2 of greater than or equal to 0.3.								
+## 			This script will produce VCFs (one per chromosome) that are merged across imputation batches.					
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Example: 																														
-## 			2.4_post-imputation-variant-pruning.sh /path/to/my/QC/files   														
+## 			2.5_merging-imputation-batches.sh	 														
 ## 																																
 ##################################################################################################################################
 
 # ------------------------------------- #
-#  Input parameters						#
-# ------------------------------------- #
-imputation_path=${1} # path to output from imputation
-
-# ------------------------------------- #
 #  Starting script						#
 # ------------------------------------- #
-
 for i in {1..22};
 	do
-		bcftools view -c 1:minor ${imputation_path}/chr${i}.dose.vcf.gz | bcftools filter -e 'INFO/R2<=0.3' -O z > ${imputation_path}/chr${i}.imputed.poly.filtered.vcf.gz
-		tabix -p vcf ${imputation_path}/chr${i}.imputed.poly.filtered.vcf.gz
+		bcftools merge /path/to/batch1/chr${i}.imputed.poly.filtered.vcf.gz /path/to/batch2/chr${i}.imputed.poly.filtered.vcf.gz /path/to/batch3/chr${i}.imputed.poly.filtered.vcf.gz -Oz -o ../results_tmp/chr${i}.imputed.poly.filtered.merged.vcf.gz 
 	done
+
+
+
