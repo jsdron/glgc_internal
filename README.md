@@ -23,7 +23,7 @@ git clone https://github.com/jsdron/glgc_internal.git
 The following software is required to successfully run the pipeline; however, studies will only need either GEM or MAGEE, depending on if there are unrelated or related individuals, respectively. 
 - [BGZIP and tabix](http://www.htslib.org/download/) (0.2.6 or above), which can be downloaded as part of the `htslib` package
 - [BCFtools](http://www.htslib.org/download/) (1.3.1 or above)
-- [QCTOOL](https://www.well.ox.ac.uk/~gav/qctool_v2/documentation/download.html) (XXX or above) 
+- [QCTOOL](https://www.well.ox.ac.uk/~gav/qctool_v2/documentation/download.html) (2.0.1 or above) 
 - [vcftools](https://github.com/vcftools/vcftools) (0.1.8 or above)
 - [PLINK 1.9](https://www.cog-genomics.org/plink/) 
 - [PLINK 2.0](https://www.cog-genomics.org/plink/2.0/)
