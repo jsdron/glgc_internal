@@ -74,7 +74,7 @@ output_filename=${10} # GEM defaults the extension to 'gem.out'
 #  Starting script											#
 # ------------------------------------- #
 
-output=../results_for_upload/GEM/${outcome}/${exposure}/
+output=../results_tmp/GEM/${outcome}/${exposure}/
 mkdir -p ${output}
 
 file_prefix=$(basename ${imputation_file} | cut -d. -f1-10)
@@ -159,25 +159,18 @@ for i in {1..22}; do
 done
 
 
-#### Merge output!!!
+## Merge GEM output if chromosome files are separate
+for i in {1..22}; do
 
-for outcome in {HDLC LDLC TG}; do
-
-for exposure in {BMI AGE}; do
-
-for chr in {1..22}; do
-  results=/path/to/${outcome}_${exposure}.chr${chr}.GEM.out
-
-cat $results | sed '1d' >> ${outcome}_${exposure}.chrALL.GEM.out
+  results=${output}${output_filename}.chr${i}
+  cat $results | sed '1d' >> ${output}${output_filename}.chrALL.GEM.out
 
 done
 
-cat ${outcome}_${exposure}.chrALL.GEM.out | sed '1s/^/SNPID\tRSID\tCHR\tPOS\tNon_Effect_Allele\tEffect_Allele\tN_Samples\tAF\tBeta_Marginal\trobust_SE_Beta_Marginal\tSE_Beta_Marginal\tBeta_G\tBeta_GxE\trobust_SE_Beta_G\trobust_SE_Beta_GxE\trobust_Cov_Beta_G_GxE\tSE_Beta_G\tSE_Beta_GxE\tCov_Beta_G_GxE\trobust_P_Value_Marginal\trobust_P_Value_Interaction\trobust_P_Value_Joint\tP_Value_Marginal\tP_Value_Interaction\tP_Value_Joint\n/'| gzip > ${outcome}_${exposure}.chrALL.GEM.out.gz
+## This section should not be removed. It is important to note that it modifies the header
+output_final=../results_for_upload/GEM/
+mkdir -p ${output_final}
 
-done
+cat ${output}${output_filename}.chrALL.GEM.out | sed '1s/^/SNPID\tRSID\tCHR\tPOS\tNon_Effect_Allele\tEffect_Allele\tN_Samples\tAF\tBeta_Marginal\trobust_SE_Beta_Marginal\tSE_Beta_Marginal\tBeta_G\tBeta_GxE\trobust_SE_Beta_G\trobust_SE_Beta_GxE\trobust_Cov_Beta_G_GxE\tSE_Beta_G\tSE_Beta_GxE\tCov_Beta_G_GxE\trobust_P_Value_Marginal\trobust_P_Value_Interaction\trobust_P_Value_Joint\tP_Value_Marginal\tP_Value_Interaction\tP_Value_Joint\n/'| gzip > ${output_final}${output_filename}.chrALL.GEM.out.gz
 
-done
-
-
-### excluude SNPs from outcome file based on... (align with MAGEE)
-
+rm ${output}${output_filename}.chrALL.GEM.out
