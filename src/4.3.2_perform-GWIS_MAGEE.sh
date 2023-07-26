@@ -22,7 +22,7 @@
 ##			*D (Type: String) = Path to output files						
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Example: 																														
-## 			4.3.1_perform-GWIS_MAGEE.sh "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
+## 			4.3.2_perform-GWIS_MAGEE.sh "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
 ##      "/path/to/genotype/chr1.gds" "BMI" "/path/to/output/LDLC_ALLFAST_BMI_ALL_TOT_adult_case"
 ##						
 ##################################################################################################################################
