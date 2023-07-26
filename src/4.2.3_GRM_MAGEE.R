@@ -1,5 +1,5 @@
 ## This is to be run in an R environment
-## It is showing an example using GENESIS to create a GRM
+## It is showing an example of how to use GENESIS to create a GRM
 
 ## Libraries
 library(SNPRelate)
@@ -7,8 +7,8 @@ library(GENESIS)
 library(SeqArray)
 library(SeqVarTools)
 
-setwd("/path/to/gdsfiles")
-gdsfile <- "your.genotype.gds"
+setwd("/path/to/gdsfiles") # EDIT path to working directory
+gdsfile <- "your.genotype.gds" # EDIT the .gds filename
 
 
 ## LD pruning
@@ -33,12 +33,12 @@ pcs <- pcair(gds,
              snp.include=pruned)
 
 # Determine which PCs are ancestry informative
-jpeg(file="pc1_vs_pc2.jpeg") # plot top 2 PCs
-plot(pcs)
+jpeg(file="pc1_vs_pc2.jpeg") # EDIT the output name if desired
+plot(pcs) # plot top 2 PCs
 dev.off()
 
-jpeg(file="pc3_vs_pc4.jpeg") # plot PCs 3 and 4
-plot(pcs, vx = 3, vy = 4)
+jpeg(file="pc3_vs_pc4.jpeg") # EDIT the output name if desired
+plot(pcs, vx = 3, vy = 4) # plot PCs 3 and 4
 dev.off()
 
 ## Run PC-Relate
@@ -49,4 +49,4 @@ mypcrel <- pcrelate(iterator, pcs = pcs$vectors[,1:2],
                        BPPARAM = BiocParallel::MulticoreParam(workers = 16))
 
 showfile.gds(closeall=TRUE)
-save(mypcrel,file = "/path/to/grm/mypcrel.Rdata")
+save(mypcrel,file = "/path/to/grm/mypcrel.Rdata") # EDIT the path to save the .Rdata file for this session. It is required for fitting the null model.
