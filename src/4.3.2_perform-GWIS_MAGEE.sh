@@ -5,8 +5,7 @@
 ## 	Script Name: 4.3.2_perform-GWIS_MAGEE.sh																						
 ## 	Description: This is a wrapper that simplifies the process of running 
 ##               the R script "4.3.2_perform-GWIS_MAGEE.R" by providing the necessary command-line arguments. 						
-## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
-##			 Yuxuan Wang <yxw@bu.edu>
+## 	Authors: Yuxuan Wang <yxw@bu.edu>
 ## 	Date: 2023-07-19																											
 ## 	Version: 1.0																												
 ## 																																
@@ -16,7 +15,7 @@
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Input Parameters (* are required): 																							
-##			*A (Type: String) = Path to Null models													
+##			*A (Type: String) = Path to null models													
 ##			*B (Type: String) = Path to genotype files (GDS format)
 ##			*C (Type: String) = Exposure (interaction) variables (AGE/BMI)
 ##			*D (Type: String) = Path to output files						
@@ -28,7 +27,7 @@
 ##################################################################################################################################
 
 # ------------------------------------- #
-#  Input parameters											#
+#  Input parameters		                #
 # ------------------------------------- #
 
 path_to_nullmodel=$1
@@ -38,11 +37,10 @@ outfile=$4
 
 
 # ------------------------------------- #
-#  Starting script											#
+#  Starting script						#
 # ------------------------------------- #
 
-
-Rscript 4.3.2_perform-GWIS_MAGEE.R \
+Rscript ../helper/4.3.2_perform-GWIS_MAGEE.R \
 --path_to_nullmodel $path_to_nullmodel \
 --path_to_genotype $path_to_genotype \
 --exposure $exposure \

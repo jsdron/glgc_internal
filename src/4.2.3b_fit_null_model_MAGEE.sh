@@ -2,17 +2,16 @@
 
 ##################################################################################################################################
 ## 																																
-## 	Script Name: 4.2.4_null_model_MAGEE.sh																						
-## 	Description: This is a wrapper that simplifies the process of running an R script named "4.2.4_fit_null_model_MAGEE.R" 
+## 	Script Name: 4.2.3b_null_model_MAGEE.sh																						
+## 	Description: This is a wrapper that simplifies the process of running an R script "4.2.4_fit_null_model_MAGEE.R" 
 ##               by providing the necessary command-line arguments. 				
-## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
-##			 Yuxuan Wang <yxw@bu.edu>
+## 	Authors: Yuxuan Wang <yxw@bu.edu>
 ## 	Date: 2023-07-19																											
 ## 	Version: 1.0																												
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Usage:																													
-## 			4.2.4_fit_null_model_MAGEE.sh 	A 	B 	C 	D 	E
+## 			4.2.3b_fit_null_model_MAGEE.sh 	A 	B 	C 	D 	E
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Input Parameters (* are required): 																							
@@ -22,13 +21,14 @@
 ##			*D (Type: String) = Covariates as a space-separated list.
 ##			*E (Type: String) = Path to the output file, including file prefix and extension. 
 ## ---------------------------------------------------------------------------------------------------------------------------- 
-##
 ## 	Example: 																														
-## 			4.2.4_fit_null_model_MAGEE.sh "/path/to/my/phenotype/fileName.csv" "LDLC" "/path/to/grm/mypcrel.Rdata" "sex age PC1 PC2 PC3 PC4 PC5" "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
+## 			4.2.3b_fit_null_model_MAGEE.sh "/path/to/my/phenotype/fileName.csv" "LDLC" "/path/to/grm/mypcrel.Rdata" 
+##			"sex age PC1 PC2 PC3 PC4 PC5" "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
+## 
 ##################################################################################################################################
 
 # ------------------------------------- #
-#  Input parameters											#
+#  Input parameters						#
 # ------------------------------------- #
 
 path_to_pheno=$1
@@ -37,14 +37,13 @@ path_to_grm=$3
 covariates=$4
 outfile=$5
 
-
 # ------------------------------------- #
-#  Starting script											#
+#  Starting script						#
 # ------------------------------------- #
 
 # Loop through the chromosomes
 
-Rscript 4.2.4_fit_null_model_MAGEE.R \
+Rscript ../helper/4.2.3b_fit_null_model_MAGEE.R \
 --pheno_file $path_to_pheno \
 --outcome $outcome \
 --grm $path_to_grm \
