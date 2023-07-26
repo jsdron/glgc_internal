@@ -3,9 +3,8 @@
 ##################################################################################################################################
 ## 																																
 ## 	Script Name: 4.3.1_perform-GWIS_GEM.sh																						
-## 	Description: XXX  						
+## 	Description: This script runs GEM using the input variables as GEM-specific parameters.  						
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
-##			 XXX <email>
 ## 	Date: 2023-05-15																											
 ## 	Version: 1.0																												
 ## 																																
@@ -19,10 +18,9 @@
 ##									'BGEN' = .bgen input																		
 ##									'PGEN' = .pgen, .pvar, .psam input															
 ##									'BED'  = .bed, .bim, .fam																		
-##			*B (Type: String) = Path to imputation files, including the file prefix. Do not include any file extensions. 		
+##			*B (Type: String) = Path to imputation files, including the file prefix. Do NOT include any file extensions. 		
 ##			*C (Type: String) = If 'BGEN' input does not contain sample identifiers, this is the path to the sample file, 		
-##								including the file prefix and extension. If the sample file is not needed, 						
-##								set parameter as 'NA'.  																		
+##								including the file prefix and extension. If the sample file is not needed, set parameter as 'NA'.  																		
 ##			*D (Type: String) = Path to the phenotype file, including file prefix and extension. 								
 ##			*E (Type: String) = Delimiter of the phenotype file. Must be one of the following:									
 ##									'\t' = tab-delimited																		
@@ -51,7 +49,7 @@
 ## 	Example 2: 																														
 ## 			4.3.1_perform-GWIS_GEM.sh 'BGEN' /path/to/my/bgen/fileName NA /path/to/my/phenotype/fileName.csv ',' 'IID'
 ##					'LDLC' 'age' 'age2 sex PC1 PC2 PC3 PC3 PC4 PC5 PC6'	'LDLC_NONFAST_BMI_M_EAS_adult'
-
+##
 ## 	Example 3: 																														
 ## 			4.3.1_perform-GWIS_GEM.sh 'PGEN' /path/to/my/pfile/fileName NA /path/to/my/phenotype/fileName.tsv '\t' 'ids'
 ##					'TG' 'age' 'age2 sex PC1' 'TG_FAST_AGE_All_EAS_adult'	
@@ -64,7 +62,7 @@
 file_type=${1} # Type of imputation file
 imputation_file=${2} # Path to imputation file
 sample_file=${3} # If .bgen doesn't have a header block, this file must have the sample ID information. Troubleshooting here: https://large-scale-gxe-methods.github.io/GEMShowcaseWorkspace
-pheno_file=${4} # Path to the phenotype file that includes information on outcomes, exposures, and covariates
+pheno=${4} # Path to the phenotype file that includes information on outcomes, exposures, and covariates
 delim=${5} # Delimiter separating values in the phenotype file
 sampleID=${6} # Name of the variable/column header in the phenotype file that corresponds to the sample IDs
 outcome=${7} # Name of the variable/column header in the phenotype file that corresponds to the outcome of interest
@@ -76,105 +74,103 @@ output_filename=${10} # GEM defaults the extension to 'gem.out'
 #  Starting script											#
 # ------------------------------------- #
 
-Rscript ./MAGEE A B C D 
-
-
-output=../results_for_upload/GEM/${outcome}/${exposure}/
+output=../results_tmp/GEM/${outcome}/${exposure}/
 mkdir -p ${output}
 
-## splitting population groups, plus TOT
+file_prefix=$(basename ${imputation_file} | cut -d. -f1-10)
 
+for i in {1..22}; do
 
+	if [[ ${file_type} = 'BGEN' ]] && [[ ${sample_file} = 'NA' ]]; then
 
-i = chromosome
+## update this GEM path to the appropriate location/version
+		../tools/GEM \
+		   --bgen ${imputation_file}${i}.bgen \
+		   --pheno-file ${pheno} \
+		   --delim ${delim} \
+		   --sampleid-name ${sampleID} \
+		   --pheno-name ${outcome} \
+		   --exposure-names ${exposure} \
+		   --covar-names ${covariates}  \
+		   --robust 1 \
+		   --center 0 \
+		   --scale 0 \
+		   --threads 8 \
+		   --out ${output}${output_filename}.chr${i} \
+		   --output-style full 
 
-if [[ ${file_type} = 'BGEN' ]] && [[ ${sample_file} = 'NA' ]]; then
+## update this GEM path to the appropriate location/version
+	elif [[ ${file_type} = 'BGEN' ]] && [[ ${sample_file} != 'NA' ]]; then
 
-	../tools/GEM_1.4.5_static \
-	   --bgen ${imputation_file}.bgen \
-	   --pheno-file ${pheno} \
-	   --delim ${delim} \
-	   --sampleid-name ${sampleID} \
-	   --pheno-name ${outcome} \
-	   --exposure-names ${exposure} \
-	   --covar-names ${covariates}  \
-	   --robust 1 \
-	   --center 0 \
-	   --scale 0 \
-	   --out ../results_for_upload/chr${i}.${output_filename} \
-	   --output-style full 
+		../tools/GEM \
+		   --bgen ${imputation_file}${i}.bgen \
+		   --sample ${sample_file} \
+		   --pheno-file ${pheno} \
+		   --delim ${delim} \
+		   --sampleid-name ${sampleID} \
+		   --pheno-name ${outcome} \
+		   --exposure-names ${exposure} \
+		   --covar-names ${covariates}  \
+		   --robust 1 \
+		   --center 0 \
+		   --scale 0 \
+		   --threads 8 \
+		   --out ${output}${output_filename}.chr${i} \
+		   --output-style full 
 
-elif [[ ${file_type} = 'BGEN' ]] && [[ ${sample_file} != 'NA' ]]; then
+## update this GEM path to the appropriate location/version
+	elif [[ ${file_type} = 'BED' ]]; then
 
-	../tools/GEM_1.4.5_static \
-	   --bgen ${imputation_file}.bgen \
-	   --sample ${sample_file} \
-	   --pheno-file ${pheno} \
-	   --delim ${delim} \
-	   --sampleid-name ${sampleID} \
-	   --pheno-name ${outcome} \
-	   --exposure-names ${exposure} \
-	   --covar-names ${covariates}  \
-	   --robust 1 \
-	   --center 0 \
-	   --scale 0 \
-	   --out ../results_for_upload/chr${i}.${output_filename} \
-	   --output-style full 
+		../tools/GEM \
+		   --bfile ${imputation_file}${i} \
+		   --pheno-file ${pheno} \
+		   --delim ${delim} \
+		   --sampleid-name ${sampleID} \
+		   --pheno-name ${outcome} \
+		   --exposure-names ${exposure} \
+		   --covar-names ${covariates}  \
+		   --robust 1 \
+		   --center 0 \
+		   --scale 0 \
+		   --threads 8 \
+		   --out ${output}${output_filename}.chr${i} \
+		   --output-style full 
 
-elif [[ ${file_type} = 'BED' ]]; then
+## update this GEM path to the appropriate location/version
+	elif [[ ${file_type} = 'PGEN' ]]; then
 
-	../tools/GEM_1.4.5_static \
-	   --bfile ${imputation_file} \
-	   --pheno-file ${pheno} \
-	   --delim ${delim} \
-	   --sampleid-name ${sampleID} \
-	   --pheno-name ${outcome} \
-	   --exposure-names ${exposure} \
-	   --covar-names ${covariates}  \
-	   --robust 1 \
-	   --center 0 \
-	   --scale 0 \
-	   --out ../results_for_upload/chr${i}.${output_filename} \
-	   --output-style full 
+		../tools/GEM \
+		   --pfile ${imputation_file}${i} \
+		   --pheno-file ${pheno} \
+		   --delim ${delim} \
+		   --sampleid-name ${sampleID} \
+		   --pheno-name ${outcome} \
+		   --exposure-names ${exposure} \
+		   --covar-names ${covariates}  \
+		   --robust 1 \
+		   --center 0 \
+		   --scale 0 \
+		   --threads 8 \
+		   --out ${output}${output_filename}.chr${i} \
+		   --output-style full 
 
-elif [[ ${file_type} = 'PGEN' ]]; then
-
-	../tools/GEM_1.4.5_static \
-	   --pfile ${imputation_file} \
-	   --pheno-file ${pheno} \
-	   --delim ${delim} \
-	   --sampleid-name ${sampleID} \
-	   --pheno-name ${outcome} \
-	   --exposure-names ${exposure} \
-	   --covar-names ${covariates}  \
-	   --robust 1 \
-	   --center 0 \
-	   --scale 0 \
-	   --out ../results_for_upload/chr${i}.${output_filename} \
-	   --output-style full 
-
-fi  	
-
-
-#### Merge output!!!
-
-for outcome in {HDLC LDLC TG}; do
-
-for exposure in {BMI AGE}; do
-
-for chr in {1..22}; do
-  results=/path/to/${outcome}_${exposure}.chr${chr}.GEM.out
-
-cat $results | sed '1d' >> ${outcome}_${exposure}.chrALL.GEM.out
-
-done
-
-cat ${outcome}_${exposure}.chrALL.GEM.out | sed '1s/^/SNPID\tRSID\tCHR\tPOS\tNon_Effect_Allele\tEffect_Allele\tN_Samples\tAF\tBeta_Marginal\trobust_SE_Beta_Marginal\tSE_Beta_Marginal\tBeta_G\tBeta_GxE\trobust_SE_Beta_G\trobust_SE_Beta_GxE\trobust_Cov_Beta_G_GxE\tSE_Beta_G\tSE_Beta_GxE\tCov_Beta_G_GxE\trobust_P_Value_Marginal\trobust_P_Value_Interaction\trobust_P_Value_Joint\tP_Value_Marginal\tP_Value_Interaction\tP_Value_Joint\n/'| gzip > ${outcome}_${exposure}.chrALL.GEM.out.gz
-
-done
+	fi  	
 
 done
 
 
-### excluude SNPs from outcome file based on... (align with MAGEE)
+## Merge GEM output if chromosome files are separate
+for i in {1..22}; do
 
+  results=${output}${output_filename}.chr${i}
+  cat $results | sed '1d' >> ${output}${output_filename}.chrALL.GEM.out
+
+done
+
+## This section should not be removed. It is important to note that it modifies the header
+output_final=../results_for_upload/GEM/
+mkdir -p ${output_final}
+
+cat ${output}${output_filename}.chrALL.GEM.out | sed '1s/^/SNPID\tRSID\tCHR\tPOS\tNon_Effect_Allele\tEffect_Allele\tN_Samples\tAF\tBeta_Marginal\trobust_SE_Beta_Marginal\tSE_Beta_Marginal\tBeta_G\tBeta_GxE\trobust_SE_Beta_G\trobust_SE_Beta_GxE\trobust_Cov_Beta_G_GxE\tSE_Beta_G\tSE_Beta_GxE\tCov_Beta_G_GxE\trobust_P_Value_Marginal\trobust_P_Value_Interaction\trobust_P_Value_Joint\tP_Value_Marginal\tP_Value_Interaction\tP_Value_Joint\n/'| gzip > ${output_final}${output_filename}.chrALL.GEM.out.gz
+
+rm ${output}${output_filename}.chrALL.GEM.out
