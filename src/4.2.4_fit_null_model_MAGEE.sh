@@ -2,7 +2,7 @@
 
 ##################################################################################################################################
 ## 																																
-## 	Script Name: 4.2.3b_null_model_MAGEE.sh																						
+## 	Script Name: 4.2.4_null_model_MAGEE.sh																						
 ## 	Description: This is a wrapper that simplifies the process of running an R script named "4.2.4_fit_null_model_MAGEE.R" 
 ##               by providing the necessary command-line arguments. 				
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
