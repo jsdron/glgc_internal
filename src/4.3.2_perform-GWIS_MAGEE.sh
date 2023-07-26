@@ -3,7 +3,7 @@
 ##################################################################################################################################
 ## 																																
 ## 	Script Name: 4.3.2_perform-GWIS_MAGEE.sh																						
-## 	Description: This is  is a wrapper that simplifies the process of running 
+## 	Description: This is a wrapper that simplifies the process of running 
 ##               the R script "4.3.2_perform-GWIS_MAGEE.R" by providing the necessary command-line arguments. 						
 ## 	Authors: Jacqueline S. Dron <jdron@broadinstitute.org>																		
 ##			 Yuxuan Wang <yxw@bu.edu>
