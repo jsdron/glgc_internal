@@ -43,7 +43,7 @@ pheno <- fread(pheno_file)
 mypcrel <- GWASTools::getobj(grm)
 kin.mat <- pcrelateToMatrix(mypcrel)
 
-## Subset GRM based on the sample ID if needed
+## Subset GRM based on the sample ID if needed: e.g. kin.mat <- kin.mat[sample.id,sample.id]
 ## Generate the null model for LDLC
 # Adjust the variable names to reflect column names in pheno
 fomula <- as.formula(paste(outcome, " ~ ", paste(covariates, collapse= "+")))
