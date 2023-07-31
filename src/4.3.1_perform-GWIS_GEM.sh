@@ -34,8 +34,8 @@
 ##								in the phneotype file. Put a single space between each listed variable.							
 ##								DO NOT INCLUDE THE EXPOSURE AS A COVARIATE or else an error will occur. GEM automatically		
 ##								includes the exposure as a covariate. 														
-##			*J (Type: String) = The prefix for all of the GEM output files. The extension is automatically set to 'gem.out'. 
-##								Please use the naming convention detailed in XXXXXX. 	
+##			*J (Type: String) = The path and prefix for all of the GEM output files. 
+##								Please use the naming convention detailed in Section 5.2 of the Analysis Plan. 	
 ##																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Output: 																													
@@ -68,7 +68,7 @@ sampleID=${6} # Name of the variable/column header in the phenotype file that co
 outcome=${7} # Name of the variable/column header in the phenotype file that corresponds to the outcome of interest
 exposure=${8} # Name of the variable/column header in the phenotype file that corresponds to the exposure of interest
 covariates=${9} # List of covariates
-output_filename=${10} # GEM defaults the extension to 'gem.out'
+output_filename=${10} # Path and prefix for output files
 
 # ------------------------------------- #
 #  Starting script											#
@@ -167,9 +167,8 @@ for i in {1..22}; do
 
 done
 
-## This section should not be removed. It is important to note that it modifies the header
-output_final=../results_for_upload/GEM/
-mkdir -p ${output_final}
+## This section should not be removed. It is important to note that it modifies the header of the final output file
+output_final=../results_tmp/GEM/
 
 cat ${output}${output_filename}.chrALL.GEM.out | sed '1s/^/SNPID\tRSID\tCHR\tPOS\tNon_Effect_Allele\tEffect_Allele\tN_Samples\tAF\tBeta_Marginal\trobust_SE_Beta_Marginal\tSE_Beta_Marginal\tBeta_G\tBeta_GxE\trobust_SE_Beta_G\trobust_SE_Beta_GxE\trobust_Cov_Beta_G_GxE\tSE_Beta_G\tSE_Beta_GxE\tCov_Beta_G_GxE\trobust_P_Value_Marginal\trobust_P_Value_Interaction\trobust_P_Value_Joint\tP_Value_Marginal\tP_Value_Interaction\tP_Value_Joint\n/'| gzip > ${output_final}${output_filename}.chrALL.GEM.out.gz
 

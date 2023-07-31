@@ -15,10 +15,11 @@
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Input Parameters (* are required): 																							
-##			*A (Type: String) = Path to null models													
-##			*B (Type: String) = Path to genotype files (GDS format)
-##			*C (Type: String) = Exposure (interaction) variables (AGE/BMI)
-##			*D (Type: String) = Path to output files						
+##			*A (Type: String) = Path to null model	generated using 4.2.3b_fit_null_model.MAGEE.sh.												
+##			*B (Type: String) = Path to genotype files (GDS format).
+##			*C (Type: String) = Variable name in the phenotype file that contains the exposure of interest.
+##			*D (Type: String) = Path and prefix for output files. Please use the naming convention detailed in 
+##								Section 5.2 of the Analysis Plan. 							
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Example: 																														
 ## 			4.3.2_perform-GWIS_MAGEE.sh "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
@@ -34,7 +35,6 @@ path_to_nullmodel=$1
 path_to_genotype=$2
 exposure=$3
 outfile=$4
-
 
 # ------------------------------------- #
 #  Starting script						#

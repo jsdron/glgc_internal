@@ -29,7 +29,7 @@
 # ------------------------------------- #
 for i in {1..22};
 	do
-		bcftools merge /path/to/batch1/chr${i}.imputed.poly.filtered.vcf.gz /path/to/batch2/chr${i}.imputed.poly.filtered.vcf.gz /path/to/batch3/chr${i}.imputed.poly.filtered.vcf.gz -Oz -o ../results_tmp/chr${i}.imputed.poly.filtered.merged.vcf.gz 
+		bcftools merge /path/to/batch1/chr${i}.imputed.poly.filtered.vcf.gz /path/to/batch2/chr${i}.imputed.poly.filtered.vcf.gz /path/to/batch3/chr${i}.imputed.poly.filtered.vcf.gz -Oz -o ../results_tmp/chr${i}.imputed.poly.filtered.vcf.gz 
 	done
 
 

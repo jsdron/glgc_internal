@@ -29,6 +29,6 @@
 # ------------------------------------- #
 for i in {1..22};
 	do
-		qctool -g ../results_tmp/chr${i}.imputed.poly.filtered.merged.vcf.gz -vcf-genotype-field GP -og ../results_tmp/chr${i}.imputed.poly.filtered.merged.bgen 
+		qctool -g ../results_tmp/chr${i}.imputed.poly.filtered.vcf.gz -vcf-genotype-field GP -og ../results_tmp/chr${i}.imputed.poly.filtered.merged.bgen 
 		bgenix -index -clobber -g ../results_tmp/chr${i}.imputed.poly.filtered.merged.bgen 
 	done
