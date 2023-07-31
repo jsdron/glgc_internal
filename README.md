@@ -1,6 +1,6 @@
 # GLGC 2023 Analysis Pipeline
 
-This repo contains all the necessary scripts for study cohorts to run through the GLGC 2023 Analysis Pipeline. If you are interested in joining the [Global Lipids Genetics Consortium](http://www.lipidgenetics.org/), please contact XXXX.
+This repo contains all the necessary scripts for study cohorts to run through the GLGC 2023 Analysis Pipeline. If you are interested in joining the [Global Lipids Genetics Consortium](http://www.lipidgenetics.org/), please contact Gina Peloso <gpeloso@bu.edu>.
 
 Current version: 1.0
 
@@ -20,7 +20,7 @@ git clone https://github.com/jsdron/glgc_internal.git
 ```
 
 ## Dependancies
-The following software is required to successfully run the pipeline; however, studies will only need either GEM or MAGEE, depending on if there are unrelated or related individuals, respectively. 
+The following software is required to run the pipeline successfully; however, studies will only need either GEM or MAGEE, depending on if there are unrelated or related individuals, respectively. 
 - [BGZIP and tabix](http://www.htslib.org/download/) (0.2.6 or above), which can be downloaded as part of the `htslib` package
 - [BCFtools](http://www.htslib.org/download/) (1.3.1 or above)
 - [QCTOOL](https://www.well.ox.ac.uk/~gav/qctool_v2/documentation/download.html) (2.0.1 or above) 
@@ -33,7 +33,7 @@ The following software is required to successfully run the pipeline; however, st
 
 ## Overview
 Here is a pictoral representation of the [analysis plan](#analysisplan):
-
+![2023 GLGC Analysis Plan Workflow]([https://github.com/[username]/[reponame]/blob/[branch]/image.jpg](https://github.com/jsdron/glgc_internal/blob/main/helper/2023%20GLGC%20Analysis%20Plan_2023-07-31.pdf)?raw=true)
 
 
 ## Analysis Plan
