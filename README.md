@@ -33,7 +33,8 @@ The following software is required to run the pipeline successfully; however, st
 
 ## Overview
 Here is a pictoral representation of the [analysis plan](#analysisplan):
-![2023 GLGC Analysis Plan Workflow](https://github.com/jsdron/glgc_internal/blob/main/helper/2023%20GLGC%20Analysis%20Plan.pdf?raw=true)
+![2023 GLGC Analysis Plan](https://github.com/jsdron/glgc_internal/assets/13053565/c4756083-52fb-43eb-b2ae-b1fdb55dead5)
+
 
 
 ## Analysis Plan
