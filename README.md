@@ -32,9 +32,9 @@ The following software is required to run the pipeline successfully; however, st
 - R (4.1.0 or above)
 
 ## Overview
-A flowchart overview of the [analysis plan](#analysisplan) is provided: `/helper/2023 GLGC Analysis Plan.pdf`
+A flowchart overview of the [analysis plan](#analysisplan) is provided: `./helper/2023_GLGC_Analysis_Plan.pdf`
 
-![2023 GLGC Analysis Plan](https://github.com/jsdron/glgc_internal/assets/13053565/c4756083-52fb-43eb-b2ae-b1fdb55dead5)
+![2023 GLGC Analysis Plan](./helper/2023_GLGC_Analysis_Plan.pdf)
 
 ## Analysis Plan
 Do we want to include a PDF of our workplan? We could have a version control thing here, where we link the (uneditable) document here for studies to download. we can also have the different versions everytime they get updated.
