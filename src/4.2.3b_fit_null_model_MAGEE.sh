@@ -6,7 +6,7 @@
 ## 	Description: This is a wrapper that simplifies the process of running an R script "4.2.4_fit_null_model_MAGEE.R" 
 ##               by providing the necessary command-line arguments. 				
 ## 	Authors: Yuxuan Wang <yxw@bu.edu>
-## 	Date: 2023-07-19																											
+## 	Date: 2023-08-17																											
 ## 	Version: 1.0																												
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
@@ -23,7 +23,7 @@
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Example: 																														
 ## 			4.2.3b_fit_null_model_MAGEE.sh "/path/to/my/phenotype/fileName.csv" "LDLC" "/path/to/grm/mypcrel.Rdata" 
-##			"sex age PC1 PC2 PC3 PC4 PC5" "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
+##			"sex,age,PC1,PC2,PC3,PC4,PC5" "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
 ## 
 ##################################################################################################################################
 
@@ -40,8 +40,6 @@ outfile=$5
 # ------------------------------------- #
 #  Starting script						#
 # ------------------------------------- #
-
-# Loop through the chromosomes
 
 Rscript ../helper/4.2.3b_fit_null_model_MAGEE.R \
 --pheno_file $path_to_pheno \

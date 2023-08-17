@@ -13,10 +13,11 @@ parser <- ArgumentParser()
 parser$add_argument("--pheno_file", type = "character", required = TRUE) # "/path/to/my/phenotype/fileName.csv"
 parser$add_argument("--outcome", type = "character", required = TRUE) # "LDLC"
 parser$add_argument("--grm", type = "character", required = TRUE) # "/path/to/grm/mypcrel.Rdata"
-parser$add_argument("--covariates", type = "character", nargs = "*", required = TRUE) # "sex age PC1 PC2 PC3 PC4 PC5"
+parser$add_argument("--covariates", type = "character", required = TRUE) # "sex,age,PC1,PC2,PC3,PC4,PC5"
 parser$add_argument("--outfile", type = "character", required = TRUE) # "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
 
 ## Parse arguments 
+
 args <- parser$parse_args()
 
 pheno_file <- args$pheno_file
@@ -25,14 +26,7 @@ outcome <- args$outcome
 
 grm <- args$grm 
 
-### Covariates
-if (!is.null(args$covariates)) {
-  # Split the covariates string using space (" ") as the delimiter
-  covariates <- strsplit(args$covariates, " ")[[1]]
-} else {
-  # If --covariates not provided, set covariates to an empty vector
-  covariates <- character(0)
-}
+covariates <- unlist(strsplit(args$covariates, split = ","))
 
 outfile <- args$outfile
 
