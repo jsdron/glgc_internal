@@ -2,7 +2,7 @@
 library(MAGEE)
 library(parallel)
 library(argparse)
-
+library(gdsfmt)
 
 parser <- ArgumentParser()
 parser$add_argument("--path_to_nullmodel", type = "character", required = TRUE) # "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
