@@ -1,11 +1,13 @@
 ## Libraries
 library(MAGEE)
+library(parallel)
 library(argparse)
 
 
 parser <- ArgumentParser()
 parser$add_argument("--path_to_nullmodel", type = "character", required = TRUE) # "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
 parser$add_argument("--path_to_genotype", type = "character", required = TRUE) # "/path/to/genotype/file.gds"
+parser$add_argument("--outcome", type = "character", required = TRUE) # Outcome variable
 parser$add_argument("--exposure", type = "character", required = TRUE) # Exposure (interaction) variables
 parser$add_argument("--outfile", type = "character", required = TRUE) # "/path/to/output/"
 
@@ -16,9 +18,17 @@ path_to_nullmodel <- args$path_to_nullmodel
 
 path_to_genotype <- args$path_to_genotype 
 
+outcome <- args$outcome
+
 exposure <- args$exposure
 
 outfile <- args$outfile
+
+print(paste("Null Model File Path: ", path_to_nullmodel))
+print(paste("Genotype File Path: ", path_to_genotype))
+print(paste("Outcome: ", outcome))
+print(paste("Exposure: ", exposure))
+print(paste("Output File Path: ", outfile))
 
 ## Null model
 model0 <- readRDS(path_to_nullmodel)

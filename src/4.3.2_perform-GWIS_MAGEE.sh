@@ -6,8 +6,8 @@
 ## 	Description: This is a wrapper that simplifies the process of running 
 ##               the R script "4.3.2_perform-GWIS_MAGEE.R" by providing the necessary command-line arguments. 						
 ## 	Authors: Yuxuan Wang <yxw@bu.edu>
-## 	Date: 2023-07-19																											
-## 	Version: 1.0																												
+## 	Date: 2023-08-17																											
+## 	Version: 1.1																												
 ## 																																
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Usage:																													
@@ -47,13 +47,14 @@ mkdir -p ${output}
 
 for chr in {1..22}; do
     # Generate the specific input file path for each chromosome
-    geno_file="${path_to_genotype/chr$chr.gds}"
-    outfile="${output}${output_filename}/chr${chr}.magee.out"
+    geno_file="${path_to_genotype}chr${chr}.gds"
+    outfile="${output}${output_filename}.chr${chr}.magee.out"
 
     # Call the R script for each chromosome-specific file
     Rscript ../helper/4.3.2_perform-GWIS_MAGEE.R \
         --path_to_nullmodel "$path_to_nullmodel" \
         --path_to_genotype "$geno_file" \
+        --outcome "$outcome" \
         --exposure "$exposure" \
         --outfile "$outfile"
 done
