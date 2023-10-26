@@ -167,9 +167,8 @@ for i in {1..22}; do
 
 done
 
-## This section should not be removed. It is important to note that it modifies the header of the final output file
 output_final=../results_tmp/GEM/
 
-cat ${output}${output_filename}.chrALL.GEM.out | sed '1s/^/SNPID\tRSID\tCHR\tPOS\tNon_Effect_Allele\tEffect_Allele\tN_Samples\tAF\tBeta_Marginal\trobust_SE_Beta_Marginal\tSE_Beta_Marginal\tBeta_G\tBeta_GxE\trobust_SE_Beta_G\trobust_SE_Beta_GxE\trobust_Cov_Beta_G_GxE\tSE_Beta_G\tSE_Beta_GxE\tCov_Beta_G_GxE\trobust_P_Value_Marginal\trobust_P_Value_Interaction\trobust_P_Value_Joint\tP_Value_Marginal\tP_Value_Interaction\tP_Value_Joint\n/'| gzip > ${output_final}${output_filename}.chrALL.GEM.out.gz
+cat ${output}${output_filename}.chrALL.GEM.out | gzip > ${output_final}${output_filename}.chrALL.GEM.out.gz
 
 rm ${output}${output_filename}.chrALL.GEM.out
