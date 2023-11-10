@@ -13,7 +13,8 @@ parser <- ArgumentParser()
 parser$add_argument("--pheno_file", type = "character", required = TRUE) # "/path/to/my/phenotype/fileName.csv"
 parser$add_argument("--outcome", type = "character", required = TRUE) # "LDLC"
 parser$add_argument("--grm", type = "character", required = TRUE) # "/path/to/grm/mypcrel.Rdata"
-parser$add_argument("--covariates", type = "character", required = TRUE) # "sex,age,PC1,PC2,PC3,PC4,PC5"
+parser$add_argument("--exposure", type = "character", required = TRUE) # "age or bmi"
+parser$add_argument("--covariates", type = "character", required = TRUE) # "agesq,sex,PC1,PC2,PC3,PC4,PC5"
 parser$add_argument("--outfile", type = "character", required = TRUE) # "/path/to/nullmodel/LDLC_ALLFAST_BMI_ALL_TOT_adult_case.glmmkin_nullmod.rds"
 
 ## Parse arguments 
@@ -26,6 +27,8 @@ outcome <- args$outcome
 
 grm <- args$grm 
 
+exposure <- args$exposure
+
 covariates <- unlist(strsplit(args$covariates, split = ","))
 
 outfile <- args$outfile
@@ -33,6 +36,7 @@ outfile <- args$outfile
 print(paste("Phenotype File Path: ", pheno_file))
 print(paste("Outcome: ", outcome))
 print(paste("GRM File Path: ", grm))
+print(paste("Exposure: ", exposure))
 print(paste("Covariates: ", paste(covariates, collapse = ", ")))
 print(paste("Output File Path: ", outfile))
 
@@ -50,7 +54,7 @@ kin.mat <- pcrelateToMatrix(mypcrel,sample.include = pheno$sample.id)
 
 ## Generate the null model for LDLC
 # Adjust the variable names to reflect column names in pheno
-fomula <- as.formula(paste(outcome, " ~ ", paste(covariates, collapse= "+")))
+fomula <- as.formula(paste(outcome, " ~ ", paste(exposure, covariates, collapse= "+")))
 
 obj_nullmodel <- GMMAT::glmmkin(fomula,data=pheno,family=gaussian(link = "identity"),id = "sample.id", kins = kin.mat)
 

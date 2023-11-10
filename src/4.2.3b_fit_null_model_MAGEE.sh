@@ -34,8 +34,9 @@
 path_to_pheno=$1
 outcome=$2
 path_to_grm=$3
-covariates=$4
-outfile=$5
+exposure=$4
+covariates=$5
+outfile=$6
 
 # ------------------------------------- #
 #  Starting script						#
@@ -45,6 +46,7 @@ Rscript ../helper/4.2.3b_fit_null_model_MAGEE.R \
 --pheno_file $path_to_pheno \
 --outcome $outcome \
 --grm $path_to_grm \
+--exposure $exposure \
 --covariates $covariates \
 --outfile $outfile
 

@@ -47,7 +47,7 @@ mkdir -p ${output}
 
 for chr in {1..22}; do
     # Generate the specific input file path for each chromosome
-    geno_file="${path_to_genotype}chr${chr}.gds"
+    geno_file="${path_to_genotype}/chr${chr}.gds"
     outfile="${output}${output_filename}.chr${chr}.magee.out"
 
     # Call the R script for each chromosome-specific file
