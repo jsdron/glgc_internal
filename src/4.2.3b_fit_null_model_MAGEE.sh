@@ -19,7 +19,7 @@
 ##			*B (Type: String) = Outcome. 
 ##			*C (Type: String) = Path to GRM. 	
 ##			*D (Type: String) = Exposure. 
-##			*E (Type: String) = Covariates as a space-separated list.
+##			*E (Type: String) = Covariates as a comma-separated list.
 ##			*F (Type: String) = Path to the output file, including file prefix and extension. 
 ## ---------------------------------------------------------------------------------------------------------------------------- 
 ## 	Example: 																														
