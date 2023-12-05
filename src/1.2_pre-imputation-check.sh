@@ -34,14 +34,14 @@
 ##################################################################################################################################
 
 # ------------------------------------- #
-#  Input parameters											#
+#  Input parameters											
 # ------------------------------------- #
 geno_input=${1} # the path to the genotype files
 build=${2} # the build of the genotype files
 file_prefix=$(basename ${geno_input} | cut -d. -f1-10) # the prefix of the genotype files without the full path
 
 # ------------------------------------- #
-#  Starting script											#
+#  Starting script											
 # ------------------------------------- #
 
 ### Download two tools to the /tools/ directory, unzip them both, and remove the original zipped file.

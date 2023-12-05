@@ -57,7 +57,7 @@
 ##################################################################################################################################
 
 # ------------------------------------- #
-#  Input parameters											#
+#  Input parameters											
 # ------------------------------------- #
 file_type=${1} # Type of imputation file
 imputation_file=${2} # Path to imputation file
@@ -71,7 +71,7 @@ covariates=${9} # List of covariates
 output_filename=${10} # Path and prefix for output files
 
 # ------------------------------------- #
-#  Starting script											#
+#  Starting script											
 # ------------------------------------- #
 
 output=../results_tmp/GEM/${outcome}/${exposure}/
