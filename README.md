@@ -8,7 +8,6 @@ Current version: 1.0
 
 - [Installation](#installation)
 - [Dependancies](#dependancies)
-- [Set-Up](#setup)
 - [Analysis Plan](#analysisplan)
 - [Contact](#contact)
 
@@ -38,8 +37,7 @@ A flowchart overview of the [analysis plan](#analysisplan) is provided: `./helpe
 ![2023 GLGC Analysis Plan](helper/2023_GLGC_Analysis_Plan.svg)
 
 ## Analysis Plan
-Do we want to include a PDF of our workplan? We could have a version control thing here, where we link the (uneditable) document here for studies to download. we can also have the different versions everytime they get updated.
-
+The analysis plan can be found here: [GLGC 2023 - Cohort Analysis Plan](https://docs.google.com/document/d/1x8F1o4krajNPLwoeJwzirMLveVs1HGlF1Z2eSnBGjo0/edit?usp=sharing) 
 
 ## Contact
 If you have any questions or feedback, please open an issue in this repository or contact the appropriate person listed in the analysis plan document. 
