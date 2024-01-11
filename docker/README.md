@@ -1,5 +1,5 @@
-## The docker file for basic analysis for GLGC2023 meta-analysis
+## A dockerfile for GLGC2023 meta-analysis
 
+### Basic Usage
 - docker pull skoyamamd/glgc
 - singularity pull glgc.sif docker://skoyamamd/glgc
-
